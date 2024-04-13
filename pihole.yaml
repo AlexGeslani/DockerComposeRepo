@@ -8,6 +8,9 @@ services:
       TZ: 'America/New_York'
       WEBPASSWORD: 'change this when pasting =)'
       WEB_PORT: '8081'
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
     volumes:
       - '/volume2/docker/Pihole/pihole:/etc/pihole'
       - '/volume2/docker/Pihole/dnsmasq.d:/etc/dnsmasq.d'
