@@ -1,26 +1,15 @@
-version: "3.2"
-
+version: "3"
 services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
+    network_mode: "host"
     environment:
       TZ: 'America/New_York'
-      WEBPASSWORD: 'Pihole!23'
-      DNSMASQ_LISTENING: local
+      WEBPASSWORD: 'Change this!'
+      WEB_PORT: '8081'
+      DNSMASQ_LISTENING: 'all'
     volumes:
       - '/volume1/docker/pihole/pihole:/etc/pihole'
       - '/volume1/docker/pihole/dnsmasq.d:/etc/dnsmasq.d'
-    ports:
-      - "53:53/tcp"  # DNS TCP
-      - "53:53/udp"  # DNS UDP
-      - "80:80/tcp"  # HTTP for web interface
     restart: unless-stopped
-networks:
-  bridge:
-    driver: bridge
-    ipam:
-    config:
-      ipv4_address: 192.168.1.6
-      subnet: 192.168.1.0/24
-      gateway: 192.168.1.1
